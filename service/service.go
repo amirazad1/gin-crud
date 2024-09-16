@@ -8,6 +8,7 @@ var BookServ *BookService
 
 func Setup() {
 	//repo := memory.NewBookRepository()
-	repo := mysql.NewBookRepository()
+	//repo := mysql.NewBookRepository()
+	repo := mysql.NewBookXRepository()
 	BookServ = NewBookService(repo)
 }
