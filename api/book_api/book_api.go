@@ -13,7 +13,7 @@ func GetAll(context *gin.Context) {
 	books, err := service.BookServ.GetAll()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": msg.ERROR,
+			"message": msg.ERROR + err.Error(),
 		})
 		return
 	}
@@ -36,7 +36,7 @@ func GetByID(context *gin.Context) {
 	book, err := service.BookServ.GetById(id)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": msg.ERROR,
+			"message": msg.ERROR + err.Error(),
 		})
 		return
 	}
@@ -59,7 +59,7 @@ func Create(context *gin.Context) {
 	err = service.BookServ.Create(item)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": msg.ERROR,
+			"message": msg.ERROR + err.Error(),
 		})
 		return
 	}
@@ -90,7 +90,7 @@ func Update(context *gin.Context) {
 	err = service.BookServ.Update(id, item)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": msg.ERROR,
+			"message": msg.ERROR + err.Error(),
 		})
 		return
 	}
@@ -112,7 +112,7 @@ func Delete(context *gin.Context) {
 	err = service.BookServ.Delete(id)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": msg.ERROR,
+			"message": msg.ERROR + err.Error(),
 		})
 		return
 	}

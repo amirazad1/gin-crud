@@ -23,7 +23,7 @@ func (s *BookService) GetById(id int64) (*models.Book, error) {
 	return s.repo.GetById(id)
 }
 
-func (s *BookService) GetByName(name string) (*models.Book, error) {
+func (s *BookService) GetByName(name string) (*[]models.Book, error) {
 	return s.repo.GetByName(name)
 }
 
