@@ -31,8 +31,8 @@ func (s *BookService) Create(book *models.Book) error {
 	return s.repo.Create(book)
 }
 
-func (s *BookService) Update(book *models.Book) error {
-	return s.repo.Update(book)
+func (s *BookService) Update(id int64, book *models.Book) error {
+	return s.repo.Update(id, book)
 }
 
 func (s *BookService) Delete(id int64) error {

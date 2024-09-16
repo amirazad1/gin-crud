@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"github.com/amirazad1/gin-crud/pkg/setting"
 	"github.com/amirazad1/gin-crud/router"
+	"github.com/amirazad1/gin-crud/service"
 	"log"
 )
 
 func init() {
-	setting.Setup("conf/app.ini")
+	setting.Setup("config/app.ini")
+	service.Setup()
 }
 
 func main() {

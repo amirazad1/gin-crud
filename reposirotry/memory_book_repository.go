@@ -10,7 +10,10 @@ type MemoryBookRepository struct {
 }
 
 func NewMemoryBookRepository() *MemoryBookRepository {
-	return &MemoryBookRepository{}
+	var books []models.Book
+	return &MemoryBookRepository{
+		db: &books,
+	}
 }
 
 func (repo *MemoryBookRepository) GetAll() (*[]models.Book, error) {
@@ -51,13 +54,14 @@ func (repo *MemoryBookRepository) GetByName(name string) (*models.Book, error) {
 
 func (repo *MemoryBookRepository) Create(book *models.Book) error {
 	book.CreatedAt = time.Now()
+	book.ID = int64(len(*repo.db)) + 1
 	*repo.db = append(*repo.db, *book)
 	return nil
 }
 
-func (repo *MemoryBookRepository) Update(book *models.Book) error {
+func (repo *MemoryBookRepository) Update(id int64, book *models.Book) error {
 	for index, value := range *repo.db {
-		if book.ID == value.ID {
+		if id == value.ID {
 			(*repo.db)[index].Name = book.Name
 			(*repo.db)[index].Author = book.Author
 			break

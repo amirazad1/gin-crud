@@ -1,8 +1,10 @@
 package router
 
 import (
+	"github.com/amirazad1/gin-crud/api/book_api"
 	"github.com/amirazad1/gin-crud/pkg/setting"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func Setup() *gin.Engine {
@@ -13,12 +15,17 @@ func Setup() *gin.Engine {
 }
 
 func registerRoutes(server *gin.Engine) {
-	//baseUrl := setting.ServerSetting.BaseUrl
+	baseUrl := setting.ServerSetting.BaseUrl
 	root := server.Group("/")
-	//api := server.Group(baseUrl)
+	api := server.Group(baseUrl)
 
 	root.GET("ping", func(context *gin.Context) {
-		response := "pong"
-		_, _ = context.Writer.Write([]byte(response))
+		context.String(http.StatusOK, "pong")
 	})
+
+	api.GET("books", book_api.GetAll)
+	api.GET("books/:id", book_api.GetByID)
+	api.POST("books", book_api.Create)
+	api.PATCH("books/:id", book_api.Update)
+	api.DELETE("books/:id", book_api.Delete)
 }
