@@ -19,7 +19,7 @@ func GetAll(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"message": msg.Succsess,
+		"message": msg.Success,
 		"data":    books,
 	})
 }
@@ -42,7 +42,7 @@ func GetByID(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"message": msg.Succsess,
+		"message": msg.Success,
 		"data":    book,
 	})
 }
@@ -65,7 +65,7 @@ func Create(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"message": msg.Succsess,
+		"message": msg.Success,
 	})
 }
 
@@ -80,6 +80,7 @@ func Update(context *gin.Context) {
 
 	var item *models.Book
 	err = context.ShouldBind(&item)
+
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
 			"message": msg.InvalidForm,
@@ -96,7 +97,7 @@ func Update(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"message": msg.Succsess,
+		"message": msg.Success,
 	})
 }
 
@@ -118,6 +119,6 @@ func Delete(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"message": msg.Succsess,
+		"message": msg.Success,
 	})
 }
