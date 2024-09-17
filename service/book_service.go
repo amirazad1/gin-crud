@@ -19,8 +19,8 @@ func (s *BookService) GetAll() (*[]models.Book, error) {
 	return s.repo.GetAll()
 }
 
-func (s *BookService) GetById(id int64) (*models.Book, error) {
-	return s.repo.GetById(id)
+func (s *BookService) GetByID(id int64) (*models.Book, error) {
+	return s.repo.GetByID(id)
 }
 
 func (s *BookService) GetByName(name string) (*[]models.Book, error) {

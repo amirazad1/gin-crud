@@ -20,7 +20,7 @@ func (repo *BookRepository) GetAll() (*[]models.Book, error) {
 	return repo.db, nil
 }
 
-func (repo *BookRepository) GetById(id int64) (*models.Book, error) {
+func (repo *BookRepository) GetByID(id int64) (*models.Book, error) {
 	found := -1
 	for index, value := range *repo.db {
 		if id == value.ID {

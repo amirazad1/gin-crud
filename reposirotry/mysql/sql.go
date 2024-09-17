@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/amirazad1/gin-crud/models"
 	"github.com/amirazad1/gin-crud/pkg/setting"
-	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"time"
 )
@@ -52,7 +51,7 @@ func (repo *BookRepository) GetAll() (*[]models.Book, error) {
 	return &items, nil
 }
 
-func (repo *BookRepository) GetById(id int64) (*models.Book, error) {
+func (repo *BookRepository) GetByID(id int64) (*models.Book, error) {
 	query := "SELECT id,name,author,created_at FROM books WHERE id=?"
 	row := repo.db.QueryRow(query, id)
 

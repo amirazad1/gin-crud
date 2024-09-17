@@ -1,6 +1,7 @@
 package mysql
 
 import (
+	"errors"
 	"fmt"
 	"github.com/amirazad1/gin-crud/models"
 	"github.com/amirazad1/gin-crud/pkg/setting"
@@ -33,17 +34,17 @@ func NewBookGRepository() *BookGRepository {
 func (repo *BookGRepository) GetAll() (*[]models.Book, error) {
 	var items []models.Book
 	err := repo.db.Find(&items).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, err
 	}
 
 	return &items, nil
 }
 
-func (repo *BookGRepository) GetById(id int64) (*models.Book, error) {
+func (repo *BookGRepository) GetByID(id int64) (*models.Book, error) {
 	var item models.Book
 	err := repo.db.Where("id=?", id).First(&item).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, err
 	}
 
@@ -53,7 +54,7 @@ func (repo *BookGRepository) GetById(id int64) (*models.Book, error) {
 func (repo *BookGRepository) GetByName(name string) (*[]models.Book, error) {
 	var items []models.Book
 	err := repo.db.Where("name=?", name).Find(&items).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, err
 	}
 
@@ -61,23 +62,13 @@ func (repo *BookGRepository) GetByName(name string) (*[]models.Book, error) {
 }
 
 func (repo *BookGRepository) Create(book *models.Book) error {
-	err := repo.db.Create(&book).Error
-	return err
+	return repo.db.Create(&book).Error
 }
 
 func (repo *BookGRepository) Update(id int64, book *models.Book) error {
-	err := repo.db.Model(&models.Book{}).Where("id=?", id).Updates(book).Error
-	if err != nil {
-		return err
-	}
-	return err
+	return repo.db.Model(&models.Book{}).Where("id=?", id).Updates(book).Error
 }
 
 func (repo *BookGRepository) Delete(id int64) error {
-	err := repo.db.Where("id=?", id).Delete(&models.Book{}).Error
-	if err != nil {
-		return err
-	}
-
-	return err
+	return repo.db.Where("id=?", id).Delete(&models.Book{}).Error
 }

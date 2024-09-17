@@ -15,17 +15,17 @@ func Setup() *gin.Engine {
 }
 
 func registerRoutes(server *gin.Engine) {
-	baseUrl := setting.ServerSetting.BaseUrl
+	baseURL := setting.ServerSetting.BaseURL
 	root := server.Group("/")
-	api := server.Group(baseUrl)
+	api := server.Group(baseURL)
 
 	root.GET("ping", func(context *gin.Context) {
 		context.String(http.StatusOK, "pong")
 	})
 
-	api.GET("books", book_api.GetAll)
-	api.GET("books/:id", book_api.GetByID)
-	api.POST("books", book_api.Create)
-	api.PATCH("books/:id", book_api.Update)
-	api.DELETE("books/:id", book_api.Delete)
+	api.GET("books", bookapi.GetAll)
+	api.GET("books/:id", bookapi.GetByID)
+	api.POST("books", bookapi.Create)
+	api.PATCH("books/:id", bookapi.Update)
+	api.DELETE("books/:id", bookapi.Delete)
 }

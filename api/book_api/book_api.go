@@ -1,4 +1,4 @@
-package book_api
+package bookapi
 
 import (
 	"github.com/amirazad1/gin-crud/models"
@@ -13,13 +13,13 @@ func GetAll(context *gin.Context) {
 	books, err := service.BookServ.GetAll()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": msg.ERROR + err.Error(),
+			"message": msg.Error + err.Error(),
 		})
 		return
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"message": msg.SUCCESS,
+		"message": msg.Succsess,
 		"data":    books,
 	})
 }
@@ -28,21 +28,21 @@ func GetByID(context *gin.Context) {
 	id, err := strconv.ParseInt(context.Param("id"), 10, 64)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
-			"message": msg.INVALID_ID,
+			"message": msg.InvalidID,
 		})
 		return
 	}
 
-	book, err := service.BookServ.GetById(id)
+	book, err := service.BookServ.GetByID(id)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": msg.ERROR + err.Error(),
+			"message": msg.Error + err.Error(),
 		})
 		return
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"message": msg.SUCCESS,
+		"message": msg.Succsess,
 		"data":    book,
 	})
 }
@@ -52,20 +52,20 @@ func Create(context *gin.Context) {
 	err := context.ShouldBind(&item)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
-			"message": msg.INVALID_FORM,
+			"message": msg.InvalidForm,
 		})
 		return
 	}
 	err = service.BookServ.Create(item)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": msg.ERROR + err.Error(),
+			"message": msg.Error + err.Error(),
 		})
 		return
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"message": msg.SUCCESS,
+		"message": msg.Succsess,
 	})
 }
 
@@ -73,7 +73,7 @@ func Update(context *gin.Context) {
 	id, err := strconv.ParseInt(context.Param("id"), 10, 64)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
-			"message": msg.INVALID_ID,
+			"message": msg.InvalidID,
 		})
 		return
 	}
@@ -82,7 +82,7 @@ func Update(context *gin.Context) {
 	err = context.ShouldBind(&item)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
-			"message": msg.INVALID_FORM,
+			"message": msg.InvalidForm,
 		})
 		return
 	}
@@ -90,13 +90,13 @@ func Update(context *gin.Context) {
 	err = service.BookServ.Update(id, item)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": msg.ERROR + err.Error(),
+			"message": msg.Error + err.Error(),
 		})
 		return
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"message": msg.SUCCESS,
+		"message": msg.Succsess,
 	})
 }
 
@@ -104,7 +104,7 @@ func Delete(context *gin.Context) {
 	id, err := strconv.ParseInt(context.Param("id"), 10, 64)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{
-			"message": msg.INVALID_ID,
+			"message": msg.InvalidID,
 		})
 		return
 	}
@@ -112,12 +112,12 @@ func Delete(context *gin.Context) {
 	err = service.BookServ.Delete(id)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
-			"message": msg.ERROR + err.Error(),
+			"message": msg.Error + err.Error(),
 		})
 		return
 	}
 
 	context.JSON(http.StatusOK, gin.H{
-		"message": msg.SUCCESS,
+		"message": msg.Succsess,
 	})
 }

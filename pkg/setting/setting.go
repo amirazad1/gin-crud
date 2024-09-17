@@ -7,9 +7,9 @@ import (
 
 type Server struct {
 	RunMode     string
-	HttpPort    int
-	BaseUrl     string
-	TestBaseUrl string
+	HTTPPort    int
+	BaseURL     string
+	TestBaseURL string
 }
 
 var ServerSetting = &Server{}

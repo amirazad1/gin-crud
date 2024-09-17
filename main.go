@@ -15,8 +15,8 @@ func init() {
 
 func main() {
 	server := router.Setup()
-	fmt.Printf("Server starting on port %v ", setting.ServerSetting.HttpPort)
-	err := server.Run(fmt.Sprintf(":%d", setting.ServerSetting.HttpPort))
+	fmt.Printf("Server starting on port %v ", setting.ServerSetting.HTTPPort)
+	err := server.Run(fmt.Sprintf(":%d", setting.ServerSetting.HTTPPort))
 	if err != nil {
 		log.Fatal(err)
 	}
