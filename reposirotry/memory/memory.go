@@ -59,6 +59,7 @@ func (repo *BookRepository) Update(id int64, book *models.Book) error {
 		if id == value.ID {
 			(*repo.db)[index].Name = book.Name
 			(*repo.db)[index].Author = book.Author
+			book.ID = id
 			break
 		}
 	}
