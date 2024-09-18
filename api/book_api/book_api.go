@@ -66,6 +66,7 @@ func Create(context *gin.Context) {
 
 	context.JSON(http.StatusOK, gin.H{
 		"message": msg.Success,
+		"data":    item,
 	})
 }
 
@@ -98,6 +99,7 @@ func Update(context *gin.Context) {
 
 	context.JSON(http.StatusOK, gin.H{
 		"message": msg.Success,
+		"data":    item,
 	})
 }
 

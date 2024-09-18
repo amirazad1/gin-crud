@@ -62,11 +62,16 @@ func (repo *BookGRepository) GetByName(name string) (*[]models.Book, error) {
 }
 
 func (repo *BookGRepository) Create(book *models.Book) error {
-	return repo.db.Create(&book).Error
+	err := repo.db.Create(&book).Error
+	return err
 }
 
 func (repo *BookGRepository) Update(id int64, book *models.Book) error {
-	return repo.db.Model(&models.Book{}).Where("id=?", id).Updates(book).Error
+	err := repo.db.Model(&models.Book{}).Where("id=?", id).Updates(book).Error
+	if err == nil {
+		book.ID = id
+	}
+	return err
 }
 
 func (repo *BookGRepository) Delete(id int64) error {

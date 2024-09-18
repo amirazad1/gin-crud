@@ -70,7 +70,6 @@ func (repo *BookXRepository) Create(book *models.Book) error {
 	if err != nil {
 		return err
 	}
-
 	book.ID, _ = result.LastInsertId()
 	return nil
 }
@@ -78,13 +77,11 @@ func (repo *BookXRepository) Create(book *models.Book) error {
 func (repo *BookXRepository) Update(id int64, book *models.Book) error {
 	query := "UPDATE books SET name=:name,author=:author WHERE id=:id"
 	book.ID = id
-	result, err := repo.db.NamedExec(query, book)
-	if err != nil {
-		return err
+	_, err := repo.db.NamedExec(query, book)
+	if err == nil {
+		book.ID = id
 	}
-
-	book.ID, _ = result.LastInsertId()
-	return nil
+	return err
 }
 
 func (repo *BookXRepository) Delete(id int64) error {

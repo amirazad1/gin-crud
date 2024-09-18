@@ -108,6 +108,9 @@ func (repo *BookRepository) Update(id int64, book *models.Book) error {
 		return err
 	}
 	_, err = stmt.Exec(book.Name, book.Author, id)
+	if err == nil {
+		book.ID = id
+	}
 	return err
 }
 
